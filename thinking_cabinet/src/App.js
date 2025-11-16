@@ -25,7 +25,7 @@ function App() {
               </>
             }
           >
-              <Route path='/home' element= { <Home />} />
+              <Route path='/home' element= {<Home />} />
               <Route path='/cabinetAI-pre' element={<CabinetAIPre />} />
               <Route path='/cabinetAI-post' element={<CabinetAIPost />} />
               <Route path='/profile' element={<Profile  />} />

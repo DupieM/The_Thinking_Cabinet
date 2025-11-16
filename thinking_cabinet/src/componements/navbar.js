@@ -8,6 +8,7 @@ import icon from './avatar.png';
 import iconActive from './avatar_active.png';
 import icon2 from './logout.png';
 import logo from './LOGO.png';
+import { Link } from "react-router-dom";
 
 function BasicNavbar() {
   // creating const varibles to call functions and data
@@ -58,13 +59,13 @@ function BasicNavbar() {
         </div>
 
         <div className="navbar-right">
-          <a href="/profile">
+          <Link to="/profile">
             <img
               src={location.pathname === '/profile' ? iconActive : icon}
               className="avatar-icon"
               alt="Profile"
             />
-          </a>
+          </Link>
 
           {user && (
             <button onClick={handleLogout} className="logout-button">
