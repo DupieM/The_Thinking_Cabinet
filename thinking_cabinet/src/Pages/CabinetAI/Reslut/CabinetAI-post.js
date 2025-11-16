@@ -132,7 +132,6 @@ function CabinetAIPost() {
       ...chatMessages,
       { role: "user", content: userMessage },
     ];
-
     try {
       const response = await axios.post(
         API_FUNCTION_URL,
