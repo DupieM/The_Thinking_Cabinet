@@ -135,7 +135,7 @@ function CabinetAIPost() {
 
     try {
       const response = await axios.post(
-        API_URL,
+        API_FUNCTION_URL,
         {
           model: "gpt-3.5-turbo",
           messages: messagesToSend,
