@@ -7,7 +7,7 @@
     font-weight: 500;
     margin-top: 40px;
     border-radius: 25px;
-    margin-left: 140px;
+    margin-left: 280px;
     overflow: visible;
 }
 
@@ -24,7 +24,7 @@
     height: 270px;
     width: 1000px;
     /* background-color: #94A98A; */
-    margin-left: 260px;
+    margin-left: 410px;
     margin-bottom: 20px;
 }
 
@@ -112,7 +112,7 @@
     padding-left: 50px;
     padding-right: 50px;
     border-radius: 10px;
-    margin-left: 420px;
+    margin-left: 600px;
 }
 
 .Stn h2 {
@@ -133,7 +133,7 @@
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
-    margin-left: 420px;
+    margin-left: 600px;
 }
 
 .Stn2 h2 {
