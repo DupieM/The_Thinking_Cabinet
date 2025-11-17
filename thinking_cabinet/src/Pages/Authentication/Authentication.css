@@ -9,7 +9,7 @@
 
 .image-container {
     position: relative;
-    width: 90%;
+    width: 100%;
     transition: transform 0.5s ease-in-out;
     z-index: 2;
 }
@@ -23,7 +23,7 @@
 }
 
 .authentication-image {
-    width: 115%;
+    width: 100%;
     height: 100%;
     object-fit: cover;
 }
@@ -44,7 +44,7 @@
 }
 
 .image-container.normal .toggle-button {
-    left: 700px; 
+    left: 600px; 
 }
 
 .image-container.right .toggle-button {

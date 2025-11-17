@@ -43,14 +43,15 @@ function BasicNavbar() {
     <Navbar variant="dark" className="navbar">
       <Container className="navbar-container">
         <div>
-          <Navbar.Brand href="/home" style={{marginLeft: "-120px"}}>
+          <Navbar.Brand as={Link} to="/home" style={{marginLeft: "-120px"}}>
             <img src={logo} alt="Logo" style={{width: '45%'}} />
           </Navbar.Brand>
         </div>
 
         <div className="navbar-center">
           <Nav.Link
-            href="/cabinetAI-pre"
+            as={Link}
+            to="/cabinetAI-pre"
             style={{fontSize: '18pt', fontWeight: '700'}}
             className={`nav-link-custom ${isCabinetActive ? 'active' : ''}`}
           >

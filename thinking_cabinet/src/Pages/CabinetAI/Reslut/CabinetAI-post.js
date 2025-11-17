@@ -6,6 +6,8 @@ import '../Reslut/CabinetAI-post.css';
 import ScrollToTopButton from "../../../componements/ScrollToTopButton";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = "https://api.openai.com/v1/chat/completions";
+
 function CabinetAIPost() {
 
   const chatContainerRef = useRef(null);
@@ -93,25 +95,49 @@ function CabinetAIPost() {
   }, [images, genre, storyName]);
 
   // Function to generate my story with data from previous opage with OpenAI
-  const API_FUNCTION_URL = "https://us-central1-the-thinking-cabinet.cloudfunctions.net/generateStory"; // replace with your deployed function URL
-
   const generateStory = async () => {
-    setIsLoadingStory(true);
-
-    try {
-      const response = await axios.post(API_FUNCTION_URL, {
-        storyName,
-        genre,
-        images,
+      setIsLoadingStory(true); // show loader
+      const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+      let imageDescriptions = "The story includes these images: ";
+      images.forEach((img, i) => {
+        imageDescriptions += `${img.name}${i === images.length - 1 ? "" : ", "}`;
       });
 
-      setNarrative(response.data.story);
-    } catch (error) {
-      console.error("Error generating story via Firebase function:", error);
-    } finally {
-      setIsLoadingStory(false);
-    }
-  };
+      const prompt = `${imageDescriptions}. Write a ${genre} story titled "${storyName}" using around 150 to 170 words.`;
+
+      try {
+        const response = await axios.post(
+          API_URL,
+          {
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "system", content: "You are an AI storyteller." },
+              { role: "user", content: prompt },
+            ],
+            temperature: 0.7,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+          }
+        );
+
+        let generatedStory = response.data.choices[0].message.content.trim();
+
+        // Remove the title if it's part of the generated story
+        if (generatedStory.toLowerCase().startsWith(storyName.toLowerCase())) {
+          generatedStory = generatedStory.slice(storyName.length).trim();
+        }
+
+        setNarrative(generatedStory);
+      } catch (error) {
+        console.error("Error generating story:", error);
+      } finally {
+        setIsLoadingStory(false); // hide loader
+      }
+    };
 
     // Function to allow to stay by new question when geneerating new ones
   useEffect(() => {
@@ -132,9 +158,10 @@ function CabinetAIPost() {
       ...chatMessages,
       { role: "user", content: userMessage },
     ];
+
     try {
       const response = await axios.post(
-        API_FUNCTION_URL,
+        API_URL,
         {
           model: "gpt-3.5-turbo",
           messages: messagesToSend,
